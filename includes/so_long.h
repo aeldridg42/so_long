@@ -9,8 +9,7 @@
 # define KEY_ESC 53
 # define BUFFER_SIZE 1
 
-# include "../mlx/minilibx_mms_20200219/mlx.h"
-# include "../mlx/minilibx_opengl_20191021/mlx.h"
+# include <mlx.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>

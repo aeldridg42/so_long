@@ -1,5 +1,7 @@
 NAME		=	so_long
 
+NAMEB		= 	so_long_bonus
+
 SRCS		= 	base/main.c \
 				sources/imageimport/images.c \
 				sources/exiting.c \
@@ -49,31 +51,20 @@ NORMIN		= 	norminette
 all: 			$(NAME)
 
 $(NAME): 		$(OBJS)
-				$(MAKE) -C ./mlx/minilibx_mms_20200219
-				$(MAKE) -C ./mlx/minilibx_opengl_20191021
-				cp mlx/minilibx_mms_20200219/libmlx.dylib .
-				cp mlx/minilibx_opengl_20191021/libmlx.a .
-				@${CC} ${OBJS} ${CFLAGS} ${MLX} libmlx.dylib libmlx.a -o ${NAME}
+				@${CC} ${OBJS} ${CFLAGS} ${MLX} -o ${NAME}
 
 bonus:			$(BONUSOBJS)
-				$(MAKE) -C ./mlx/minilibx_mms_20200219
-				$(MAKE) -C ./mlx/minilibx_opengl_20191021
-				cp mlx/minilibx_mms_20200219/libmlx.dylib .
-				cp mlx/minilibx_opengl_20191021/libmlx.a .
-				@${CC} $(BONUSOBJS) ${CFLAGS} ${MLX} -o ${NAME}
+				@${CC} $(BONUSOBJS) ${CFLAGS} ${MLX} -o ${NAMEB}
 
 %.o : %.c 		${INCLUDES}
 				${CC} ${CFLAGS} -c $< -I ${INCLUDES} -o ${<:.c=.o}
 
 clean:
-				$(MAKE) clean -C ./mlx/minilibx_mms_20200219
-				$(MAKE) clean -C ./mlx/minilibx_opengl_20191021	
 				${RM} ${OBJS} $(BONUSOBJS)
 
 fclean:			clean
-				${RM} libmlx.dylib
-				${RM} libmlx.a
 				${RM} ${NAME}
+				${RM} ${NAMEB}
 
 re:				fclean all
 
