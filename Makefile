@@ -49,18 +49,30 @@ NORMIN		= 	norminette
 all: 			$(NAME)
 
 $(NAME): 		$(OBJS)
-				@${CC} ${OBJS} ${CFLAGS} ${MLX} -o ${NAME}
+				$(MAKE) -C ./mlx/minilibx_mms_20200219
+				$(MAKE) -C ./mlx/minilibx_opengl_20191021
+				cp mlx/minilibx_mms_20200219/libmlx.dylib .
+				cp mlx/minilibx_opengl_20191021/libmlx.a .
+				@${CC} ${OBJS} ${CFLAGS} ${MLX} libmlx.dylib libmlx.a -o ${NAME}
 
 bonus:			$(BONUSOBJS)
+				$(MAKE) -C ./mlx/minilibx_mms_20200219
+				$(MAKE) -C ./mlx/minilibx_opengl_20191021
+				cp mlx/minilibx_mms_20200219/libmlx.dylib .
+				cp mlx/minilibx_opengl_20191021/libmlx.a .
 				@${CC} $(BONUSOBJS) ${CFLAGS} ${MLX} -o ${NAME}
 
 %.o : %.c 		${INCLUDES}
 				${CC} ${CFLAGS} -c $< -I ${INCLUDES} -o ${<:.c=.o}
 
 clean:
+				$(MAKE) clean -C ./mlx/minilibx_mms_20200219
+				$(MAKE) clean -C ./mlx/minilibx_opengl_20191021	
 				${RM} ${OBJS} $(BONUSOBJS)
 
 fclean:			clean
+				${RM} libmlx.dylib
+				${RM} libmlx.a
 				${RM} ${NAME}
 
 re:				fclean all
