@@ -120,7 +120,7 @@ int	key_hook(int keycode, t_game *game)
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
 		game->images.wall, HALF, 0);
 	mlx_string_put(game->mlx.mlx, game->mlx.win, 5, 5, 0x000000, game->num);
-	mlx_string_put(game->mlx.mlx, game->mlx.win, 5, 19, 0x00000, "moves");	
+	mlx_string_put(game->mlx.mlx, game->mlx.win, 5, 19, 0x00000, "moves");
 	mlx_string_put(game->mlx.mlx, game->mlx.win, 3, 3, 0xFFFFFF, game->num);
 	mlx_string_put(game->mlx.mlx, game->mlx.win, 3, 17, 0xFFFFFF, "moves");
 	free (game->num);
