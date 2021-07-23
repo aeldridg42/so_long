@@ -26,7 +26,6 @@ void	moveright(t_game *game)
 			game->players.p_y * SCALE);
 	}
 	printf("Your moves - %d\n", game->count.countmoves += 1);
-	game->players.color -= 1;
 }
 
 void	moveleft(t_game *game)
@@ -53,7 +52,6 @@ void	moveleft(t_game *game)
 			(game->players.p_x - 1) * SCALE - HALF, game->players.p_y * SCALE);
 	}
 	printf("Your moves - %d\n", game->count.countmoves += 1);
-	game->players.color -= 1;
 }
 
 void	moveup(t_game *game)
@@ -80,7 +78,6 @@ void	moveup(t_game *game)
 			(game->players.p_y - 1) * SCALE);
 	}
 	printf("Your moves - %d\n", game->count.countmoves += 1);
-	game->players.color -= 1;
 }
 
 void	movedown(t_game *game)
@@ -107,5 +104,4 @@ void	movedown(t_game *game)
 			(game->players.p_y + 1) * SCALE);
 	}
 	printf("Your moves - %d\n", game->count.countmoves += 1);
-	game->players.color -= 1;
 }
