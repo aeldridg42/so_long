@@ -19,7 +19,9 @@ static void	gameinit(t_game *game)
 
 static void	checkargv(char **argv, t_game *game)
 {
-	int	i;
+	int		i;
+	int		fd;
+	char	*buff;
 
 	i = ft_strlen(argv[1]);
 	if (i < 5)
@@ -27,6 +29,11 @@ static void	checkargv(char **argv, t_game *game)
 	if (argv[1][i - 4] != '.' || argv[1][i - 3] != 'b'
 		|| argv[1][i - 2] != 'e' || argv[1][i - 1] != 'r')
 		ft_error(6, game);
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		ft_error(3, game);
+	if (read(fd, &buff, 1) == -1)
+		ft_error(3, game);
 }
 
 int	main(int argc, char **argv)

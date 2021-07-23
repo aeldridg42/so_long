@@ -32,10 +32,10 @@ static void	mapcheck1(t_game *game)
 				++playercount;
 			if (game->map.map[i][i2] == 'E')
 				++exitcount;
-			if (exitcount > 1 || playercount > 1)
-				ft_error(2, game);
 		}
 	}
+	if (!exitcount || playercount > 1 || !playercount)
+		ft_error(2, game);
 }
 
 static void	mapcheck2(t_game *game)

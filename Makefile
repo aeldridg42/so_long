@@ -1,6 +1,6 @@
 NAME		=	so_long
 
-NAMEB		= 	so_long_bonus
+NAMEB		=	so_long_bonus
 
 SRCS		= 	base/main.c \
 				sources/imageimport/images.c \
@@ -51,27 +51,37 @@ NORMIN		= 	norminette
 all: 			$(NAME)
 
 $(NAME): 		$(OBJS)
-				@${CC} ${OBJS} ${CFLAGS} ${MLX} -o ${NAME}
+				$(MAKE) -C ./mlx/minilibx_mms_20200219
+				$(MAKE) -C ./mlx/minilibx_opengl_20191021
+				cp mlx/minilibx_mms_20200219/libmlx.dylib .
+				cp mlx/minilibx_opengl_20191021/libmlx.a .
+				@${CC} ${OBJS} ${CFLAGS} ${MLX} libmlx.dylib libmlx.a -o ${NAME}
 
 bonus:			$(BONUSOBJS)
-				@${CC} $(BONUSOBJS) ${CFLAGS} ${MLX} -o ${NAMEB}
+				$(MAKE) -C ./mlx/minilibx_mms_20200219
+				$(MAKE) -C ./mlx/minilibx_opengl_20191021
+				cp mlx/minilibx_mms_20200219/libmlx.dylib .
+				cp mlx/minilibx_opengl_20191021/libmlx.a .
+				@${CC} $(BONUSOBJS) ${CFLAGS} ${MLX} libmlx.dylib libmlx.a -o ${NAMEB}
 
 %.o : %.c 		${INCLUDES}
 				${CC} ${CFLAGS} -c $< -I ${INCLUDES} -o ${<:.c=.o}
 
 clean:
-				${RM} ${OBJS} $(BONUSOBJS)
+				$(MAKE) clean -C ./mlx/minilibx_mms_20200219
+				$(MAKE) clean -C ./mlx/minilibx_opengl_20191021	
+				${RM} $(OBJS) $(BONUSOBJS)
 
 fclean:			clean
-				${RM} ${NAME}
-				${RM} ${NAMEB}
+				${RM} libmlx.dylib libmlx.a
+				${RM} ${NAME} ${NAMEB}
 
 re:				fclean all
 
 norm:		
-			$(NORMIN) bonus/
-			$(NORMIN) sources/
-			$(NORMIN) includes/
-			$(NORMIN) base/
+				$(NORMIN) bonus/
+				$(NORMIN) sources/
+				$(NORMIN) includes/
+				$(NORMIN) base/
 
 .PHONY:			all clean fclean re bonus norm
