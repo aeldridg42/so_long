@@ -47,6 +47,8 @@ int	main(int argc, char **argv)
 	parser(argv, &game);
 	gameinit(&game);
 	mapdraw(&game);
+	mlx_string_put(game.mlx.mlx, game.mlx.win, 5, 5, 0x000000, "0");
+	mlx_string_put(game.mlx.mlx, game.mlx.win, 5, 19, 0x000000, "moves");
 	mlx_string_put(game.mlx.mlx, game.mlx.win, 3, 3, 0xFFFFFF, "0");
 	mlx_string_put(game.mlx.mlx, game.mlx.win, 3, 17, 0xFFFFFF, "moves");
 	mlx_hook(game.mlx.win, 2, (1L << 0), key_hook, &game);
